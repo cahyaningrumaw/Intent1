@@ -1,8 +1,10 @@
 package id.sch.smktelkom_mlg.learn.intent1;
 
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class HasilActivity extends AppCompatActivity {
 
@@ -10,9 +12,19 @@ public class HasilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hasil);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        onOptionsItemSelected()
+
+        setTitle("Hasil");
+
+        String nama = getIntent().getStringExtra(MainActivity.NAMA);
+        int umur = getIntent().getIntExtra(MainActivity.UMUR, 0);
+
+        int yearNow = Calendar.getInstance().get(Calendar.YEAR);
+        int tahunLahir = yearNow - umur;
+
+        TextView tvHasil = (TextView) findViewById(R.id.textViewHasil);
+        tvHasil.setText(nama + " lahir pada tahun " + tahunLahir);
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
